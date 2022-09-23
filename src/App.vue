@@ -1,16 +1,30 @@
-<script setup lang="ts">
-import DiffChart from './DiffChart.vue'
-
-const actual = [Math.random() * 100, Math.random() * 100, Math.random() * 100]
-const prediction = [Math.random() * 100, Math.random() * 100, Math.random() * 100]
-const labels = ['A', 'B', 'C']
+<script setup>
+import Dashboard from './dashboard/Dashboard.vue';
+import ChartView from './chartview/ChartView.vue';
 </script>
 
 <template>
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-  <diff-chart :actual="actual" :prediction="prediction" :labels="labels" />
+  <Dashboard />
 </template>
 
-<style scoped>
+<script>
+export default {
+  data(){
+    return {
+      "halo": "s",
+    }
+  }
+}
+</script>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    overflow-x: hidden;
+  }
+  *, div {
+    box-sizing: border-box;
+  }
 </style>
