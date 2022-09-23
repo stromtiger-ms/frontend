@@ -7,7 +7,7 @@
         :fields="{zeit: {required: true, label: 'Zeit'}, kw: {required: true, label: 'kW'}}"
     >
       <div class="add-form">
-        <vue-csv-submit :url="TIGER_API_URL" />
+        <vue-csv-submit :url="TIGER_API_URL + '/csv'" />
         <input type="text" placeholder="Verbraucher Name" />
 
         <vue-csv-toggle-headers></vue-csv-toggle-headers>
