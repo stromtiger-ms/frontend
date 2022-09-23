@@ -1,10 +1,21 @@
-<script setup lang="ts">
+<script setup>
 import Dashboard from './dashboard/Dashboard.vue';
+import ChartView from './chartview/ChartView.vue';
 </script>
 
 <template>
   <Dashboard />
 </template>
+
+<script>
+export default {
+  data(){
+    return {
+      "halo": "s",
+    }
+  }
+}
+</script>
 
 <style>
   body {

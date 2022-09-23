@@ -1,11 +1,12 @@
 <script setup>
 import Consumer from './Consumer.vue';
+import Nav from '../Nav.vue';
 
 </script>
 
 <template>
   <div>
-    <div id="nav"></div>
+    <Nav />
     <div id="content">
         <div id="sidebar"></div>
         <div id="consumer_list">
@@ -45,17 +46,7 @@ export default {
 </script>
 
 <style scoped>
-    #nav {
-        position: fixed;
-        height: 6vh;
-        width: 100vw;
-        background-color: aquamarine;
-        z-index: 99;
-        box-sizing: border-box;
-    }
-
     #content {
-        padding-top: 6vh;
         width: 100vw;
         display: flex;
         box-sizing: border-box;
