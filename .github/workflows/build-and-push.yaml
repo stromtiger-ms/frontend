@@ -24,7 +24,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist-folder
-          path: frontend/dist
+          path: dist
 
   docker:
     name: Build Docker image
@@ -37,11 +37,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist-folder
-          path: frontend/dist
-      - name: Build and Push Docker with latest tag
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: stromtiger-ms/frontend:latest
+          path: dist
+      - name: Login to Package registry
+        run: echo $CR_PAT | docker login ghcr.io -u stromtiger-ms --password-stdin
+        env:
+          CR_PAT: ${{ secrets.CR_PAT }}
+      - name: Build Docker image
+        run: docker build --tag stromtiger-ms/frontend:latest .
+      - name: Push Docker image to GitHub Packages
+        run: docker push stromtiger-ms/frontend:latest
