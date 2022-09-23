@@ -1,11 +1,19 @@
 <script setup>
-import Nav from "../Nav.vue";
+import Nav from '../Nav.vue'
 import DiffChart from '../DiffChart.vue'
 import getConsumer from "./getConsumer"
 
-const actual = [Math.random() * 100, Math.random() * 100, Math.random() * 100]
-const prediction = [Math.random() * 100, Math.random() * 100, Math.random() * 100]
-const labels = ['A', 'B', 'C']
+function generate(n) {
+  const m = []
+  for (let i = 0; i < n; i += 1) {
+    m.push(Math.random() * 100)
+  }
+  return m
+}
+
+const actual = generate(100)
+const prediction = generate(100)
+const labels = generate(100).map((_, i) => i)
 </script>
 
 <template>
