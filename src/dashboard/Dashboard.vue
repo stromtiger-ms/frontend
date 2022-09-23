@@ -10,7 +10,7 @@ import Nav from '../Nav.vue';
     <div id="content">
         <div id="sidebar"></div>
         <div id="consumer_list">
-            <Consumer v-for="consumer in consumerList" :name="consumer.name" />
+            <Consumer v-for="consumer in consumerList" :id="consumer.id" />
         </div>
     </div>
   </div>
@@ -22,18 +22,21 @@ export default {
         return {
             consumerList: [
                 {
+                    "id": 0,
                     "name": "Verbraucher1",
                     "wert0": "Zeitraum",
                     "trainingData": "No training data available",
                     "trainLink": "https://localhost/",
                 },
                 {
+                    "id": 1,
                     "name": "Verbraucher2",
                     "wert0": "Zeitraum",
                     "trainingData": "No training data available",
                     "trainLink": "https://localhost/",
                 },
                 {
+                    "id": 2,
                     "name": "Verbraucher3",
                     "wert0": "Zeitraum",
                     "trainingData": "No training data available",
@@ -56,7 +59,8 @@ export default {
         position: fixed;
         width: 20vw;
         height: 94vh;
-        background-color: grey;
+        background-color: var(--secondaryColor);
+        color: white;
         box-sizing: border-box;
     }
 

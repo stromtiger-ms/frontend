@@ -2,15 +2,23 @@
   <div>
     <h1>{{ name }}</h1>
     <p>Zeitraum 01.01.2022 - 30.06.2022</p>
-    <p>No training data available</p>
-    <router-link :to="{ name: 'chart-view', params: {id: name } }">Go to Home</router-link>
-    <button @click="$router.push({ name: 'chart-view', params: { id: name }})">Train</button>
+    <p v-if="trained">Trained ☑</p>
+    <p v-else>No training data available</p>
+    <router-link :to="{ name: 'chart-view', params: {id: id } }">
+        <button>View</button>
+    </router-link>
   </div>
 </template>
 
 <script>
     export default {
-        props: ['name'],
+        props: ['id'],
+        data(){
+            return {
+                "name": "Verbraucher 1",
+                trained: Math.random() > 0.5
+            }
+        }
     }
 </script>
 
@@ -24,11 +32,13 @@
         width: 100%;
         display: flex;
         flex-wrap: nowrap;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
 
         font-size: 1rem;
         padding: 1rem;
+        padding-left: 4rem;
+        padding-right: 4rem;
         cursor: pointer;
     }
 
@@ -41,6 +51,8 @@
         background-color: lightgreen;
         font-size: 1rem;
         font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
     }
 
 </style>

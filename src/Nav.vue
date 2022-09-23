@@ -1,6 +1,10 @@
 <template>
     <div>
-        <p>Strom Tiger</p>
+        <h1 @click="$router.push({ name: 'index'})">Strom Tiger</h1>
+        <nav id="nav_right">
+            <a>Kontakt</a>
+            <a>#MUENSTERHACK</a>
+        </nav>
     </div>
 </template>
 
@@ -14,12 +18,23 @@ export default {
 div {
         height: 6vh;
         width: 100vw;
-        background-color: aquamarine;
+        background-color: var(--primaryColor);
+        color: white;
         z-index: 99;
         box-sizing: border-box;
-    }
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 2vw;
+        padding-right: 2vw;
+}
 
-p {
-    margin: 0;
+h1 {
+    cursor: pointer;
+}
+
+a {
+    margin-left: 2vw;
+    font-size: 1rem;
 }
 </style>
