@@ -68,7 +68,6 @@ const config = computed(() => {
         },
         zoom: {
           limits: {
-            // TODO: Make configurable
             y: { min: 0, max: max.value }
           },
 
@@ -89,7 +88,7 @@ const config = computed(() => {
             pinch: {
               enabled: true
             },
-            mode: 'xy'
+            mode: 'x'
           }
         }
       }
@@ -97,19 +96,14 @@ const config = computed(() => {
   }
 })
 
-const chart = ref(null) as Ref<Chart | null>
-
 watch(
     () => [ctx.value, config.value],
     () => {
-      const c = unref(chart)
+      const c = Chart.getChart(ctx.value)
       if (c) {
         c.destroy()
       }
-      if (!ctx.value) {
-        debugger
-      }
 
-      chart.value = new Chart(ctx.value, config.value)
+      new Chart(ctx.value, config.value)
     })
 </script>
