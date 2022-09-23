@@ -3,7 +3,8 @@
     <h1>{{ name }}</h1>
     <p>Zeitraum 01.01.2022 - 30.06.2022</p>
     <p>No training data available</p>
-    <button>Train</button>
+    <router-link :to="{ name: 'chart-view', params: {id: name } }">Go to Home</router-link>
+    <button @click="$router.push({ name: 'chart-view', params: { id: name }})">Train</button>
   </div>
 </template>
 
@@ -19,7 +20,7 @@
         margin-top: 2vw;
         box-shadow: 2px 2px 5px 5px #dddddd;
         transition: all 300ms;
-        
+
         width: 100%;
         display: flex;
         flex-wrap: nowrap;
