@@ -14,7 +14,9 @@
       "DOM"
     ],
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "preserve",
+    "allowJs": true
   },
   "include": [
     "src/**/*.ts",

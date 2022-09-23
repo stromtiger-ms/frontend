@@ -1,10 +1,19 @@
 <script setup lang="ts">
+import Dashboard from './dashboard/Dashboard.vue';
 </script>
 
 <template>
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
+  <Dashboard />
 </template>
 
-<style scoped>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    overflow-x: hidden;
+  }
+  *, div {
+    box-sizing: border-box;
+  }
 </style>
