@@ -1,6 +1,7 @@
 <script setup>
 import Consumer from './Consumer.vue';
 import Nav from '../Nav.vue';
+import AddConsumer from './AddConsumer.vue';
 
 </script>
 
@@ -10,6 +11,7 @@ import Nav from '../Nav.vue';
     <div id="content">
         <div id="sidebar"></div>
         <div id="consumer_list">
+            <AddConsumer />
             <Consumer v-for="consumer in consumerList" :id="consumer.id" />
         </div>
     </div>
