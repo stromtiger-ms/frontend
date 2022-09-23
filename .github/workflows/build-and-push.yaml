@@ -47,6 +47,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build --tag stromtiger-ms/frontend:latest .
+        run: docker build --tag ghcr.io/stromtiger-ms/frontend:latest .
       - name: Push Docker image to GitHub Packages
         run: docker push stromtiger-ms/frontend:latest
