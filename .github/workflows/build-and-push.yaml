@@ -1,0 +1,47 @@
+name: Build vite and Docker image - push to GitHub packages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build vite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Setup NPM
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+      - name: Install Vite
+        run: npm install -g vite
+      - name: Install Dependencies
+        run: npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-folder
+          path: frontend/dist
+
+  docker:
+    name: Build Docker image
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: dist-folder
+          path: frontend/dist
+      - name: Build and Push Docker with latest tag
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: stromtiger-ms/frontend:latest
