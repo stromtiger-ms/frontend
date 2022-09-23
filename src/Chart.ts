@@ -1,4 +1,3 @@
-// import * as ChartGeo from 'chartjs-chart-geo/build/index'
 import {
     CategoryScale,
     Chart,
@@ -10,7 +9,7 @@ import {
     PointElement,
     Tooltip
 } from 'chart.js'
-// import { ChoroplethController, ColorScale, GeoFeature, ProjectionScale } from 'chartjs-chart-geo'
+import Zoom from 'chartjs-plugin-zoom'
 
 Chart.register(CategoryScale)
 Chart.register(LineController)
@@ -20,14 +19,8 @@ Chart.register(LineElement)
 Chart.register(Tooltip)
 Chart.register(Filler)
 Chart.register(Legend)
-
-// Chart.register(ChoroplethController)
-// Chart.register(ProjectionScale)
-// Chart.register(ColorScale)
-// Chart.register(GeoFeature)
-// Chart.register(Tooltip)
+Chart.register(Zoom)
 
 export {
     Chart
-    // ChartGeo
 }

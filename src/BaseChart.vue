@@ -29,6 +29,11 @@ const props = defineProps({
   }
 })
 
+const max = computed(() => props
+    .dataset
+    .flatMap(set => (set as any).data)
+    .reduce((a, b) => Math.max(a, b), Number.MIN_VALUE))
+
 const config = computed(() => {
   return {
     type: props.type,
@@ -37,12 +42,54 @@ const config = computed(() => {
       datasets: props.dataset
     },
     options: {
+      transitions: {
+        show: {
+          animations: {
+            visible: {
+              duration: 0
+            }
+          }
+        },
+        hide: {
+          animations: {
+            visible: {
+              duration: 0
+            }
+          }
+        }
+      },
       responsive: true,
       showTooltips: true,
       plugins: {
         tooltip: {
           interaction: {
-            mode: 'nearest'
+            mode: 'index'
+          }
+        },
+        zoom: {
+          limits: {
+            // TODO: Make configurable
+            y: { min: 0, max: max.value }
+          },
+
+          pan: {
+            enabled: true,
+            mode: 'xy',
+            modifierKey: 'ctrl'
+          },
+
+          zoom: {
+            wheel: {
+              enabled: true
+            },
+            drag: {
+              enabled: true,
+              mode: 'x'
+            },
+            pinch: {
+              enabled: true
+            },
+            mode: 'xy'
           }
         }
       }
@@ -56,7 +103,6 @@ watch(
     () => [ctx.value, config.value],
     () => {
       const c = unref(chart)
-      console.log(c)
       if (c) {
         c.destroy()
       }
