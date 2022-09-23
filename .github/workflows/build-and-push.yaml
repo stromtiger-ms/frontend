@@ -15,10 +15,10 @@ jobs:
       - name: Setup NPM
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-      - name: Install Vite
-        run: npm install -g vite
+          node-version: '16.10'
       - name: Install Dependencies
+        run: npm install
+      - name: Execute Vite Build
         run: npm run build
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
