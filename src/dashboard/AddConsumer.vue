@@ -1,22 +1,24 @@
 <template>
-  <div class="add-container">
+  <div class="add-container" :class="{'add-form-container': !closed}">
     <div v-if="closed" class="add" @click="closed = false">Verbraucher hinzufügen</div>
-    <div v-else class="add-form">
-      <vue-csv-import
-          v-model="csv"
-          :fields="{zeit: {required: true, label: 'Zeit'}, kw: {required: true, label: 'kW'}}"
-      >
+    <vue-csv-import
+        v-else
+        v-model="csv"
+        :fields="{zeit: {required: true, label: 'Zeit'}, kw: {required: true, label: 'kW'}}"
+    >
+      <div class="add-form">
         <vue-csv-submit :url="TIGER_API_URL" />
         <input type="text" placeholder="Verbraucher Name" />
 
         <vue-csv-toggle-headers></vue-csv-toggle-headers>
         <vue-csv-errors></vue-csv-errors>
         <vue-csv-input></vue-csv-input>
-        <vue-csv-map :auto-match="false"></vue-csv-map>
-      </vue-csv-import>
 
-      <button @click="closed = true">X</button>
-    </div>
+        <button @click="closed = true">X</button>
+      </div>
+
+      <vue-csv-map :auto-match="false"></vue-csv-map>
+    </vue-csv-import>
   </div>
 </template>
 
@@ -46,6 +48,10 @@
   padding: 1rem;
   display: flex;
   justify-content: space-around;
+}
+
+.add-form-container {
+  flex-direction: column;
 }
 </style>
 
