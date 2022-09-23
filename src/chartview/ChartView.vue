@@ -16,7 +16,7 @@ const actual = generate(100)
 const prediction = generate(100)
 const labels = generate(100).map((_, i) => i)
 
-const performance = ref(false)
+const performance = ref(true)
 </script>
 
 <template>
@@ -33,6 +33,7 @@ const performance = ref(false)
         Performance Modus {{ performance ? 'ausschalten' : 'einschalten' }}
       </label>
       <diff-chart :actual="actual" :prediction="prediction" :labels="labels" :show-fill="!performance" />
+      <p>Mit der STRG Taste kann die Ansicht nach links und rechts verschoben werden.</p>
     </div>
   </div>
 </template>

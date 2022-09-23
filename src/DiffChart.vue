@@ -42,7 +42,7 @@ function generateDiff(actual: number[], prediction: number[]) {
   const diff = []
   for (let i = 0; i < actual.length; i += 1) {
     const x = actual[i] - prediction[i]
-    diff.push(Math.log2(Math.abs(x)) * Math.sign(x))
+    diff.push(Math.abs(x))
   }
   return diff
 }
