@@ -2,7 +2,6 @@
 import Consumer from './Consumer.vue';
 import Nav from '../Nav.vue';
 import AddConsumer from './AddConsumer.vue';
-
 </script>
 
 <template>
