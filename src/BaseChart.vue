@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import { computed, Ref, ref, unref, watch, watchEffect } from 'vue'
 import { Chart } from './Chart'
+import { ChartConfiguration, ChartTypeRegistry } from 'chart.js'
 
 const canvas = ref(null) as any as Ref<HTMLCanvasElement>
 
@@ -94,11 +95,15 @@ const config = computed(() => {
       }
     }
   }
-})
+}) as Ref<ChartConfiguration>
 
 watch(
     () => [ctx.value, config.value],
     () => {
+      if (ctx.value === null) {
+        // No 2d Context yet
+        return
+      }
       const c = Chart.getChart(ctx.value)
       if (c) {
         c.destroy()
