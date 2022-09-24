@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div @click="$router.push({ name: 'chart-view', params: {id: id}})">
     <h1>{{ name }}</h1>
-    <p>Zeitraum 01.01.2022 - 30.06.2022</p>
-    <p v-if="trained">Trained ☑</p>
-    <p v-else>No training data available</p>
+    <!--<p>Zeitraum 01.01.2022 - 30.06.2022</p>-->
+    <p v-if="trainStatus === 'trained'">Trained ☑</p>
+    <p v-if="trainStatus === 'isTraining'">Training in progress...</p>
+    <button v-if="trainStatus === 'notTrained'">Train Model</button>
     <router-link :to="{ name: 'chart-view', params: {id: id } }">
-        <button>View</button>
+        <button style="background-color:lightgreen;color: black;">View</button>
     </router-link>
   </div>
 </template>
@@ -16,7 +17,19 @@
         data(){
             return {
                 "name": "Verbraucher 1",
-                trained: Math.random() > 0.5
+                
+            }
+        },
+        computed: {
+            trainStatus: () => {
+                const rand = Math.random();
+                if(rand < 0.33){
+                    return "notTrained";
+                }
+                if(rand < 0.66){
+                    return "isTraining";
+                }
+                return "trained";
             }
         }
     }
@@ -25,6 +38,7 @@
 <style scoped>
     div {
         border: 1px solid black;
+        border-radius: 5px;
         margin-top: 2vw;
         box-shadow: 2px 2px 5px 5px #dddddd;
         transition: all 300ms;
@@ -48,8 +62,10 @@
 
     button {
         padding: 1rem 2rem 1rem 2rem;
-        background-color: lightgreen;
+        background-color: var(--secondaryColor);
         font-size: 1rem;
+        border-radius: 5px;
+        color: white;
         font-weight: bold;
         text-decoration: none;
         cursor: pointer;
