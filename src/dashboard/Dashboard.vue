@@ -6,6 +6,7 @@ import TrainModel from './Train.vue'
 
 import { TIGER_API_URL } from '../env'
 import { reactive, ref } from 'vue'
+import Spinner from '../Spinner.vue'
 
 const url2 = TIGER_API_URL + '/getallverbraucher'
 
@@ -34,44 +35,53 @@ refreshData()
 </script>
 
 <template>
-  <div>
+  <div class="dashboard">
     <Nav />
-    <div id="content">
-      <div id="sidebar"></div>
-      <div id="consumer_list" v-if="!loading">
+    <div class="content">
+      <div class="sidebar"></div>
+      <div class="consumer_list" v-if="!loading">
         <AddConsumer @success="refreshData" @fail="refreshData" />
         <TrainModel @success="refreshData" @fail="refreshData" />
         <Consumer v-for="consumer in verbraucher" :id="consumer.id" :name="consumer.name" />
       </div>
-      <div v-else>
-        Bitte Warten
+      <div class="consumer_list center" v-else>
+        <Spinner />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-#content {
+.content {
+  height: 94vh;
   width: 100vw;
   display: flex;
   box-sizing: border-box;
 }
 
-#sidebar {
+.sidebar {
   position: fixed;
   width: 20vw;
-  height: 94vh;
+  height: 100%;
   background-color: var(--secondaryColor);
   color: white;
   box-sizing: border-box;
 }
 
-#consumer_list {
+.consumer_list {
   width: 80vw;
   margin-left: 20vw;
   box-sizing: border-box;
   padding-bottom: 5vw;
   padding-left: 5vw;
   padding-right: 5vw;
+}
+
+.consumer_list.center {
+  margin: auto auto auto 20vw;
+}
+
+.dashboard, .content, .consumer_list {
+  height: 100%;
 }
 </style>

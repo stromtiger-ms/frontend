@@ -24,5 +24,10 @@ body {
   background-color: var(--backgroundColor);
 }
 
+html {
+  height: 80vh;
+}
 
-
+body, #app {
+  height: 100%;
+}
