@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>{{ name }}</h1>
+    <button @click="getAllVerbraucher()">getALLVerbraucher</button>
+    <h1>{{ verbraucher }}</h1>
     <p>Zeitraum 01.01.2022 - 30.06.2022</p>
     <p v-if="trained">Trained ☑</p>
     <p v-else>No training data available</p>
@@ -11,14 +12,22 @@
 </template>
 
 <script>
+
+import {TIGER_API_URL} from "../env.js";
+import axios from "axios";
+
+
+
     export default {
         props: ['id'],
         data(){
             return {
-                "name": "Verbraucher 1",
+                "name": null,
                 trained: Math.random() > 0.5
             }
         }
+
+
     }
 </script>
 

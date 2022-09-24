@@ -12,6 +12,8 @@
         <vue-csv-input :validation="false" :headers="false"></vue-csv-input>
 
         <button @click="upload()">Verbrauchsdaten hochladen</button>
+        <button @click="allVerbraucher()">getAllVerbraucher</button>
+
         <button @click="closed = true">X</button>
 
       </div>
@@ -63,7 +65,7 @@ import {
 
 import { ref } from 'vue'
 import { TIGER_API_URL } from '../env'
-import axios from "axios";
+import axios from "axios"
 
 const verbraucherName = ref(null)
 const csv = ref(null)
@@ -77,6 +79,21 @@ const upload = async () => {
       })
   .then(response => {
     console.log(response.data)
+  })
+  .catch(error => {
+    alert(error)
+  })
+}
+
+const url2 = TIGER_API_URL + '/getallverbraucher'
+
+let verbraucher = null
+
+const allVerbraucher = async () => {
+  axios.get(url2)
+  .then(response => {
+    console.log(response.data)
+    verbraucher = response.data.name
   })
   .catch(error => {
     alert(error)
