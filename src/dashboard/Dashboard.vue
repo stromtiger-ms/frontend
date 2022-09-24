@@ -2,6 +2,7 @@
 import Consumer from './Consumer.vue'
 import Nav from '../Nav.vue'
 import AddConsumer from './AddConsumer.vue'
+import TrainModel from './Train.vue'
 
 import { TIGER_API_URL } from '../env'
 import { reactive, ref } from 'vue'
@@ -39,6 +40,7 @@ refreshData()
       <div id="sidebar"></div>
       <div id="consumer_list" v-if="!loading">
         <AddConsumer @success="refreshData" @fail="refreshData" />
+        <TrainModel @success="refreshData" @fail="refreshData" />
         <Consumer v-for="consumer in verbraucher" :id="consumer.id" :name="consumer.name" />
       </div>
       <div v-else>

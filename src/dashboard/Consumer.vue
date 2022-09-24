@@ -11,7 +11,6 @@
 </template>
 
 <script>
-
 import { TIGER_API_URL } from '../env.js'
 import axios from 'axios'
 
