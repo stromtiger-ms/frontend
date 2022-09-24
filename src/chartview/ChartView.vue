@@ -3,6 +3,7 @@ import Nav from '../Nav.vue'
 import DiffChart from '../DiffChart.vue'
 import getConsumer from './getConsumer'
 import { ref } from 'vue'
+import Spinner from '../Spinner.vue'
 
 function generate(n) {
   const m = []
@@ -21,8 +22,10 @@ const performance = ref(true)
 
 <template>
   <Nav />
-  <div v-if="loading" id="loading">loading...</div>
-  <div v-else id="content">
+  <div v-if="loading" class="content loading">
+    <Spinner />
+  </div>
+  <div v-else class="content loaded">
     <div id="sidebar">
       <h1>name</h1>
       <p>{{ $route.params.id }}</p>
@@ -71,18 +74,15 @@ export default {
 </script>
 
 <style scoped>
-#loading {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50% -50%);
+.content.loading {
+  height: 100%;
 }
 
-#content {
+.content.loaded {
+  height: 100%;
   width: 100vw;
   display: flex;
   box-sizing: border-box;
-
 }
 
 #sidebar {
@@ -99,9 +99,6 @@ export default {
   width: 80vw;
   margin-left: 20vw;
   box-sizing: border-box;
-  padding-bottom: 5vw;
-  padding-left: 5vw;
-  padding-right: 5vw;
-  padding-top: 5vw;
+  padding: 5vw;
 }
 </style>

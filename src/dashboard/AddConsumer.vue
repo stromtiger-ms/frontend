@@ -12,6 +12,7 @@
         <vue-csv-input :validation="false" :headers="false"></vue-csv-input>
 
         <button @click="upload()">Verbrauchsdaten hochladen</button>
+
         <button @click="closed = true">X</button>
 
       </div>
@@ -61,9 +62,11 @@ import {
   VueCsvImport
 } from 'vue-csv-import'
 
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { TIGER_API_URL } from '../env'
-import axios from "axios";
+import axios from 'axios'
+
+const emit = defineEmits(['uploaded'])
 
 const verbraucherName = ref(null)
 const csv = ref(null)
@@ -75,12 +78,13 @@ const upload = async () => {
         verbraucher: verbraucherName.value,
         verbrauchsdaten: csv.value
       })
-  .then(response => {
-    console.log(response.data)
-  })
-  .catch(error => {
-    alert(error)
-  })
+      .then(response => {
+        console.log(response.data)
+      })
+      .then(() => emit('success'))
+      .catch(error => {
+        alert(error)
+        emit('fail')
+      })
 }
-
 </script>
