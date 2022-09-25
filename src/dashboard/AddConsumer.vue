@@ -4,20 +4,20 @@
     <vue-csv-import
         v-else
         v-model="csv"
-        :fields="{zeit: {required: true, label: 'Zeit'}, kw: {required: true, label: 'kW'}}"
+        :fields="{zeit: {required: false, label: 'Zeit'}, kw: {required: false, label: 'kW'}}"
     >
       <div class="add-form">
-        <vue-csv-submit :url="TIGER_API_URL + '/csv'" />
-        <input type="text" placeholder="Verbraucher Name" />
+        <input v-model="verbraucherName" type="text" placeholder="Verbraucher Name" />
 
-        <vue-csv-toggle-headers></vue-csv-toggle-headers>
-        <vue-csv-errors></vue-csv-errors>
-        <vue-csv-input></vue-csv-input>
+        <vue-csv-input :validation="false" :headers="false"></vue-csv-input>
+
+        <button @click="upload()">Verbrauchsdaten hochladen</button>
 
         <button @click="closed = true">X</button>
+
       </div>
 
-      <vue-csv-map :auto-match="false"></vue-csv-map>
+      <vue-csv-map :auto-match="true" :no-thead="true"></vue-csv-map>
     </vue-csv-import>
   </div>
 </template>
@@ -57,19 +57,34 @@
 
 <script setup>
 import {
-  VueCsvToggleHeaders,
-  VueCsvSubmit,
   VueCsvMap,
   VueCsvInput,
-  VueCsvErrors,
   VueCsvImport
 } from 'vue-csv-import'
 
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { TIGER_API_URL } from '../env'
+import axios from 'axios'
 
+const emit = defineEmits(['uploaded'])
+
+const verbraucherName = ref(null)
 const csv = ref(null)
+const url = TIGER_API_URL + '/csv'
 const closed = ref(true)
 const upload = async () => {
+  axios.post(url,
+      {
+        verbraucher: verbraucherName.value,
+        verbrauchsdaten: csv.value
+      })
+      .then(response => {
+        console.log(response.data)
+      })
+      .then(() => emit('success'))
+      .catch(error => {
+        alert(error)
+        emit('fail')
+      })
 }
 </script>
